@@ -1,0 +1,21 @@
+use std::path::Path;
+use std::fs;
+use chrono::Local;
+
+fn main() {
+    let folder_name = prompt_folder_name();
+    let current_datetime = Local::now().format("%y%m%d_%H_%M").to_string();
+    let new_folder = format!("{}_{}", current_datetime, folder_name);
+    let path = Path::new(&new_folder);
+    match fs::create_dir(path) {
+        Ok(_) => println!("Folder {} created", new_folder),
+        Err(e) => println!("Error creating folder: {}", e),
+    }
+}
+
+fn prompt_folder_name() -> String {
+    println!("Enter folder name:");
+    let mut folder_name = String::new();
+    std::io::stdin().read_line(&mut folder_name).unwrap();
+    folder_name.trim().to_string()
+}
