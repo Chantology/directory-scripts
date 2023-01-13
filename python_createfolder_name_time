@@ -1,0 +1,18 @@
+import os
+from datetime import datetime
+
+# Prompt user for folder name
+folder_name = input("Enter folder name: ")
+
+# Get current date and time
+current_datetime = datetime.now().strftime('%y%m%d_%H_%M')
+
+# Get current directory
+current_dir = os.getcwd()
+
+# Create new folder with user-specified name, current date and time
+new_folder = current_datetime + "_" + folder_name
+path = os.path.join(current_dir, new_folder)
+os.mkdir(path)
+
+print(f"Folder {new_folder} created at {path}")
