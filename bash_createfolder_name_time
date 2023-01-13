@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Prompt user for folder name
+read -p "Enter folder name: " folderName
+
+# Get current date and time
+currentDateTime=$(date +%y%m%d_%H_%M)
+
+# Get current directory
+currentDir=$(pwd)
+
+# Create new folder with user-specified name, current date and time
+mkdir "$currentDir/$currentDateTime"_"$folderName"
+
+# Add folder creation option to right-click context menu
+nautilus -q
+nautilus --no-desktop &
+sleep 1
+
+# Add folder creation option to right-click context menu
+gsettings set org.gnome.nautilus.preferences new-folder-with-selection true
